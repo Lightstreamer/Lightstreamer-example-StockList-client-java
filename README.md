@@ -85,4 +85,4 @@ See Also
 Lightstreamer Compatibility Notes
 ---------------------------------
 
-- Compatible with SDK for Java SE Clients v. 2.5.2 or newer.
+- Compatible with Lightstreamer Java Client API v. 2.5.2 or newer.
