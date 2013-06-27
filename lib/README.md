@@ -1,0 +1,1 @@
+Drop here the ls-client.jar from the Lightstreamer Java SE Client Library.
