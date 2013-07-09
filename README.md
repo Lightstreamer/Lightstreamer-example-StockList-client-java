@@ -1,16 +1,19 @@
 
-Lightstreamer StockList Demo Client for Java SE
-===============================================
+# Lightstreamer StockList Demo Client for Java SE #
+
+This project contains an example of a Java Swing application that employs the Java client library.
+
+## Swing Stock-List Demo ##
 
 <table>
   <tr>
     <td style="text-align: left">
-      &nbsp;<a href="http://www.lightstreamer.com/demo/JavaSE_Swing_StockListDemo/demo.jnlp" target="_blank"><img src="http://www.lightstreamer.com/img/demo/screen_javaseswing.png"></a>&nbsp;
+      &nbsp;<a href="http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp" target="_blank"><img src="http://www.lightstreamer.com/img/demo/screen_javaseswing.png"></a>&nbsp;
       
     </td>
     <td>
       &nbsp;Click here to download and install the application:<br>
-      &nbsp;<a href="http://www.lightstreamer.com/demo/JavaSE_Swing_StockListDemo/demo.jnlp" target="_blank">http://www.lightstreamer.com/demo/JavaSE_Swing_StockListDemo/demo.jnlp</a>
+      &nbsp;<a href="http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp" target="_blank">http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp</a>
     </td>
   </tr>
 </table>
@@ -19,18 +22,16 @@ This is a Java Swing version of the [Stock-List Demos](https://github.com/Weswit
 
 This app uses the <b>Java SE Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.<br>
 
-By clicking the image or link above, a Java application will be downloaded and launched via Java Web Start technology. If Java Web Start is not already installed, you will be automatically redirected to the download site.
-When prompted, please accept the digital signature by "www.lightstreamer.com".<br>
-
 You can sort on any columns and drag the columns around.<br>
 This application uses the "com.lightstreamer.ls_client" layer of the Lightstreamer Java SE client library to connect to Lightstreamer Server and subscribe to the 30 items. The application code implements auto-reconnection and auto-resubscription logic, together with a connection status indicator.
 Java Swing classes are used to display the real-time updates received from Lightstreamer Server. The application code implements a cell highlighting mechanism too.
 
+# Build #
 
-Build and Run the Demo
-----------------------
+If you want to skip the build and deploy processes of this demo please note that you can click the image or link above, a Java application will be downloaded and launched via Java Web Start technology. If Java Web Start is not already installed, you will be automatically redirected to the download site.
+When prompted, please accept the digital signature by "www.lightstreamer.com".<br>
 
-The example is comprised of the following folders:
+Otherwise, if you want to prodedere with the compilation of own version of this demo please consider that this example is comprised of the following folders:
 * /src<br>
   Contains the sources to build the java application from the java compiler  and its embedded images.
 
@@ -39,13 +40,15 @@ The example is comprised of the following folders:
 
 * /bin<br>
   Drop here the application jar, as compiled from the provided source files. 
-  
+
 Example of build commands:
 ```sh
  >javac -source 1.7 -target 1.7 -nowarn -g -classpath lib/ls-client.jar -sourcepath src/javasedemo -d tmp_classes src/javasedemo/swing/StockListDemo.java
  
  >jar cvf java_sld.jar -C tmp_classes javasedemo
 ```
+
+# Deploy #
   
 A couple of shell/batch files that can be used to run the demo:
 * batch command:
@@ -75,14 +78,21 @@ Those scripts are ready to run the client against the default Lightstreamer conf
 
 The example requires that the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) and [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) have to be deployed in your local Lightstreamer server instance. The factory configuration of Lightstreamer server already provides this adapter deployed.<br>
 
-See Also
---------
+# See Also #
 
-* [Lightstreamer StockList Demo Client for JavaScript](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript)
+## Lightstreamer Adapters needed by this demo client ##
+
 * [Lightstreamer StockList Demo Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
 * [Lightstreamer Reusable Metadata Adapter in Java](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java)
 
-Lightstreamer Compatibility Notes
----------------------------------
+## Similar demo clients that may interest you ##
+
+* [Lightstreamer StockList Demo Client for JavaScript](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript)
+* [Lightstreamer StockList Demo Client for jQuery](https://github.com/Weswit/Lightstreamer-example-StockList-client-jquery)
+* [Lightstreamer StockList Demo Client for Dojo](https://github.com/Weswit/Lightstreamer-example-StockList-client-dojo)
+* [Lightstreamer StockList Demo Client for Java .NET](https://github.com/Weswit/Lightstreamer-example-StockList-client-dotnet)
+* [Lightstreamer Portfolio Demo Client for Adobe Flex SDK](https://github.com/Weswit/Lightstreamer-example-Portfolio-client-flex)
+
+# Lightstreamer Compatibility Notes #
 
 - Compatible with Lightstreamer Java Client API v. 2.5.2 or newer.
