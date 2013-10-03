@@ -1,14 +1,13 @@
-
 # Lightstreamer StockList Demo Client for Java SE #
 
-This project contains an example of a Java Swing application that employs the Java client library.
+This project contains an example of a Java Swing application that employs the Java SE client library.
 
 ## Swing Stock-List Demo ##
 
 <table>
   <tr>
     <td style="text-align: left">
-      &nbsp;<a href="http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp" target="_blank"><img src="http://www.lightstreamer.com/img/demo/screen_javaseswing.png"></a>&nbsp;
+      &nbsp;<a href="http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp" target="_blank"><img src="screen_javaseswing.png"></a>&nbsp;
       
     </td>
     <td>
@@ -96,3 +95,4 @@ The example requires that the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstr
 # Lightstreamer Compatibility Notes #
 
 - Compatible with Lightstreamer Java Client API v. 2.5.2 or newer.
+- For Lightstreamer Allegro (+ Java Client API support), Presto, Vivace.
