@@ -1,5 +1,7 @@
 # Lightstreamer - Basic Stock-List Demo - Java SE (Swing) Client #
 
+<!-- START DESCRIPTION lightstreamer-example-stocklist-client-java -->
+
 This project contains an example of a Java Swing application that employs the Java SE client library.
 
 <table>
@@ -22,6 +24,8 @@ This app uses the <b>Java SE Client API for Lightstreamer</b> to handle the comm
 You can sort on any columns and drag the columns around.<br>
 This application uses the "com.lightstreamer.ls_client" layer of the Lightstreamer Java SE client library to connect to Lightstreamer Server and subscribe to the 30 items. The application code implements auto-reconnection and auto-resubscription logic, together with a connection status indicator.
 Java Swing classes are used to display the real-time updates received from Lightstreamer Server. The application code implements a cell highlighting mechanism too.
+
+<!-- END DESCRIPTION lightstreamer-example-stocklist-client-java -->
 
 # Build #
 
@@ -78,9 +82,12 @@ The example requires that the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstr
 # See Also #
 
 ## Lightstreamer Adapters needed by this demo client ##
+<!-- START RELATED_ENTRIES -->
 
 * [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
 * [Lightstreamer - Reusable Metadata Adapters- Java Adapter](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java)
+
+<!-- END RELATED_ENTRIES -->
 
 ## Similar demo clients that may interest you ##
 
