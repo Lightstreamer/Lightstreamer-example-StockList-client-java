@@ -6,7 +6,7 @@ This project contains an example of a Java Swing application that employs the Ja
 
 ![Demo ScreenShot](screen_javaseswing_large.png)<br>
 Click here to download and install the application: [http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp)<br>
-
+<br>
 This is a Java Swing version of the [Stock-List Demos](https://github.com/Weswit/Lightstreamer-example-StockList-client-javascript), where thirty items are subscribed to.<br>
 
 This app uses the <b>Java SE Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.<br>
