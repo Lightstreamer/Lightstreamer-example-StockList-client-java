@@ -4,18 +4,8 @@
 
 This project contains an example of a Java Swing application that employs the Java SE client library.
 
-<table>
-  <tr>
-    <td style="text-align: left">
-      &nbsp;<a href="http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp" target="_blank"><img src="screen_javaseswing.png"></a>&nbsp;
-      
-    </td>
-    <td>
-      &nbsp;Click here to download and install the application:<br>
-      &nbsp;<a href="http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp" target="_blank">http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp</a>
-    </td>
-  </tr>
-</table>
+![Demo ScreenShot](screen_javaseswing_large.png)<br>
+Click here to download and install the application: [http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp)<br>
 
 This is a Java Swing version of the [Stock-List Demos](https://github.com/Weswit/Lightstreamer-example-StockList-client-javascript), where thirty items are subscribed to.<br>
 
@@ -81,7 +71,7 @@ The example requires that the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstr
 
 # See Also #
 
-## Lightstreamer Adapters needed by this demo client ##
+## Lightstreamer Adapters Needed by This Demo Client ##
 <!-- START RELATED_ENTRIES -->
 
 * [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
@@ -89,7 +79,7 @@ The example requires that the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstr
 
 <!-- END RELATED_ENTRIES -->
 
-## Similar demo clients that may interest you ##
+## Related Projects ##
 
 * [Lightstreamer - Stock-List Demos - HTML Clients](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript)
 * [Lightstreamer - Basic Stock-List Demo - jQuery (jqGrid) Client](https://github.com/Weswit/Lightstreamer-example-StockList-client-jquery)
