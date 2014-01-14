@@ -4,7 +4,7 @@
 
 This project contains an example of a Java Swing application that employs the Java SE client library.
 
-![Demo ScreenShot](screen_javaseswing_large.png)<br>
+[![Demo ScreenShot](screen_javaseswing_large.png)](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp)<br>
 [Click here to download and install the application](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp).<br>
 
 This is a Java Swing version of the [Stock-List Demos](https://github.com/Weswit/Lightstreamer-example-StockList-client-javascript), where thirty items are subscribed to.<br>
