@@ -2,7 +2,7 @@
 
 <!-- START DESCRIPTION lightstreamer-example-stocklist-client-java -->
 
-This project contains an example of a Java Swing application that employs the Java SE client library.
+This project contains an example of a Java Swing application that employs the [Lightstreamer Java SE client library](http://www.lightstreamer.com/docs/client_javase_api/index.html).
 
 [![Demo ScreenShot](screen_javaseswing_large.png)](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp)<br>
 [Click here to download and install the application](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp).<br>
