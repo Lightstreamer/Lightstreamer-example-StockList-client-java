@@ -4,8 +4,11 @@
 
 This project contains an example of a Java Swing application that employs the [Lightstreamer Java SE client library](http://www.lightstreamer.com/docs/client_javase_api/index.html).
 
-[![Demo ScreenShot](screen_javaseswing_large.png)](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp)<br>
-[Click here to download and install the application](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/demo.jnlp).<br>
+[![Demo ScreenShot](screen_javaseswing_large.png)](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/javase-stocklist-demo.zip)<br>
+*To run this application you must have Java installed*. If you don't have Java, please download it from [here] (https://www.java.com/en/download/).
+- [download the demo](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/javase-stocklist-demo.zip).
+- unzip the javase-stocklist-demo.zip file
+- launch the script start_demo.bat (on Windows) or start_demo.sh (on Linux).
 
 This is a Java Swing version of the [Stock-List Demos](https://github.com/Weswit/Lightstreamer-example-StockList-client-javascript), where thirty items are subscribed to.<br>
 
