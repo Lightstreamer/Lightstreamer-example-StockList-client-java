@@ -53,8 +53,6 @@ Example of build commands:
  >jar cvf java_sld.jar -C tmp_classes javasedemo
 ```
 
-# Deploy #
-  
 A couple of shell/batch files that can be used to run the demo:
 * batch command:
 
