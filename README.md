@@ -9,7 +9,7 @@ This project contains an example of a <b>Java Swing application</b> that employs
 [![Demo ScreenShot](screen_javaseswing_large.png)](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/javase-stocklist-demo.zip)<br>
 ###[![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/javase-stocklist-demo.zip)<br>
 (download javase-stocklist-demo.zip; unzip it; launch `start_demo.bat` on Windows or `start_demo.sh` on Linux)
-*To run this demo you must have Java installed*. If you don't have Java already installed, please download it from [here] (https://www.java.com/en/download/).<BR/>
+*To run this demo, you must have Java installed*. If you don't have Java already installed, please download it from [here] (https://www.java.com/en/download/).<BR/>
 
 ## Details
 
@@ -19,7 +19,7 @@ This app uses the <b>Java SE Client API for Lightstreamer</b> to handle the comm
 You can sort on any columns and drag the columns around.<br>
 
 This application uses the "com.lightstreamer.ls_client" layer of the Lightstreamer Java SE client library to connect to Lightstreamer Server and subscribe to the 30 items. The application code implements auto-reconnection and auto-resubscription logic, together with a connection status indicator.
-Java Swing classes are used to display the real-time updates received from Lightstreamer Server. The application code implements a cell highlighting mechanism too.
+Java Swing classes are used to display the real-time updates received from Lightstreamer Server. The application code implements a cell highlighting mechanism, too.
 
 <!-- END DESCRIPTION lightstreamer-example-stocklist-client-java -->
 
@@ -29,12 +29,12 @@ If you want to install a version of this demo pointing to your local Lightstream
 
 * Note that, as prerequisite, the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
 * Launch Lightstreamer Server.
-* Download the `deploy.zip` file that you can find in the [deploy release](https://github.com/Weswit/Lightstreamer-example-StockList-client-java/releases) of this project and extract the `javase-stocklist-demo` folder.
-* Launch `start_demo.bat` on Windows or `start_demo.sh` on Linux (please note that the demo try to connect to http://localhost:8080).
+* Download the `deploy.zip` file, which you can find in the [deploy release](https://github.com/Weswit/Lightstreamer-example-StockList-client-java/releases) of this project and extract the `javase-stocklist-demo` folder.
+* Launch `start_demo.bat` on Windows or `start_demo.sh` on Linux (please note that the demo tries to connect to http://localhost:8080).
 
 ## Build
 
-To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above, follow these steps.
+To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above, follow these steps:
 
 Please consider that this example is comprised of the following folders:
 * /src<br>
