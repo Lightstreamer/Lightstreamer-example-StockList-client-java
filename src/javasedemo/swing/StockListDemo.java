@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Weswit Srl
+ * Copyright 2015 Weswit Srl
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,23 +22,18 @@ public class StockListDemo {
 
     private static final long serialVersionUID = 1L;
 
-    
-    /**
-     * @param args
-     */
     public static void main(final String[] args) {
-        //args[0] should contain the hostname of the Lightstreamer server.
-        //args[1] should contain the port the Lightstreamer server is listening to. 
+        //args[0] should contain the address of the Lightstreamer server (e.g.: http://localhost:8080 ) 
         
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 //the StockView instance will handle the JTable that shows the data
                 StockView view = new StockView();
                 view.initialize();
                 //the StockFeed instance will connect to a Lightstreamer server, will subscribe to a set of items 
                 //and will store the received data
-                StockFeed feed = new StockFeed(args[0],Integer.parseInt(args[1]), view);
-                feed.start();
+                new StockFeed(args[0], view);
             }
         });
     }
