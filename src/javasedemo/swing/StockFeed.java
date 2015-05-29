@@ -74,7 +74,6 @@ public class StockFeed {
         //setup the client, will handle our connection and our subscriptions making sure we're always connected 
         //and our items are always subscribed (well, as long as there is a network between us and the server)
         this.client = new LightstreamerClient(lighstreamerAddress, "DEMO");
-        this.client.connectionOptions.setForcedTransport("HTTP");  //TODO remove this call
         client.addListener(new StatusListener());
         
         //setup the subscription, it will receive the data for us
