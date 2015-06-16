@@ -38,14 +38,41 @@ If you want to install a version of this demo pointing to your local Lightstream
 
 ## Build
 
-To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above, follow these steps:
+To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above you have to options:
+either use [Maven](https://maven.apache.org/) to take care of dependencies and building (recommended) or gather the necessary jars yourself and build 
+it manually. 
+
+###Maven
+
+You can easily build and run this application using Maven through the pom.xml file located in the root folder of this project.
+
+Assuming Maven is installed and available in your path you can build the demo by running
+```sh
+mvn package
+```
+ 
+You can also run the application with the following command
+```sh
+mvn exec:java -Dexec.args="http://push.lightstreamer.com"
+```
+the arguments in the above command is obviously the target Lightstreamer server, it can be changed to point
+to your own server provided that [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
+is installed on it (the [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) is also needed, 
+but it is already provided by Lightstreamer server.)
+
+
+###Manual
+
+
+Follow these steps:
 
 Please consider that this example is comprised of the following folders:
 * /src<br>
   Contains the sources to build the java application from the java compiler and its embedded images.
 
 * /lib<br>
-  Drop here the `ls-javase-client.jar` from the Lighstreamer SDK for Java SE Clients, to be used for the build process and execution together with all its required libraries (see the sdk for more information).
+  Drop here the `ls-java-client-*.jar` from the Lighstreamer SDK for Java SE Clients, to be used for the build process and execution together with all its required libraries.
+  (dependencies are only required to run the application, the only compile requirement is the Lightstreamer Java client itself)
 
 * /bin<br>
   Drop here the application jar, as compiled from the provided source files. 
