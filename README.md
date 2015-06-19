@@ -38,7 +38,7 @@ If you want to install a version of this demo pointing to your local Lightstream
 
 ## Build
 
-To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above you have to options:
+To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above you have two options:
 either use [Maven](https://maven.apache.org/) to take care of dependencies and building (recommended) or gather the necessary jars yourself and build 
 it manually. 
 
@@ -60,9 +60,7 @@ to your own server provided that [Lightstreamer - Stock- List Demo - Java Adapte
 is installed on it (the [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) is also needed, 
 but it is already provided by Lightstreamer server.)
 
-
 ###Manual
-
 
 Follow these steps:
 
