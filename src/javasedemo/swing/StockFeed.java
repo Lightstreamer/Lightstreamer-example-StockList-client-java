@@ -131,7 +131,7 @@ public class StockFeed {
             case "DISCONNECTED":
             case "DISCONNECTED:WILL_RETRY":
             case "CONNECTING": 
-            case "CONNECTED:STREAM-SENSE": //we're actually connected here
+            case "CONNECTED:STREAM-SENSING": //we're actually connected here
               changeStatus(DISCONNECTED);
               break;
             case "CONNECTED:WS-STREAMING":
