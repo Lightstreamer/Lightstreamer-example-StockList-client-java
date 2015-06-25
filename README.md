@@ -38,13 +38,12 @@ If you want to install a version of this demo pointing to your local Lightstream
 
 ## Build
 
-To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above you have two options:
-either use [Maven](https://maven.apache.org/) to take care of dependencies and building (recommended) or gather the necessary jars yourself and build 
-it manually. 
+To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above, you have two options:
+either use [Maven](https://maven.apache.org/) (or other build tools) to take care of dependencies and building (recommended) or gather the necessary jars yourself and build it manually. 
 
 ###Maven
 
-You can easily build and run this application using Maven through the pom.xml file located in the root folder of this project.
+You can easily build and run this application using Maven through the pom.xml file located in the root folder of this project. As an alternative, you can use an alternative build tool (e.g. Gradle, Ivy, etc.) by converting the provided pom.xml file.
 
 Assuming Maven is installed and available in your path you can build the demo by running
 ```sh
@@ -69,8 +68,7 @@ Please consider that this example is comprised of the following folders:
   Contains the sources to build the java application from the java compiler and its embedded images.
 
 * /lib<br>
-  Drop here the `ls-java-client-*.jar` from the Lighstreamer SDK for Java SE Clients, to be used for the build process and execution together with all its required libraries.
-  (dependencies are only required to run the application, the only compile requirement is the Lightstreamer Java client itself)
+  Drop here the `ls-java-client-*.jar` from the Lighstreamer SDK for Java SE Clients, to be used for the build process and execution together with all its required libraries. You can discover the required libraries and their dependencies by looking at the provided pom.xml file. Note that dependencies are only required to run the application; the only compile requirement is the Lightstreamer Java client itself.
 
 * /bin<br>
   Drop here the application jar, as compiled from the provided source files. 
