@@ -78,7 +78,7 @@
     <dependency>
       <groupId>com.lightstreamer</groupId>
       <artifactId>ls-java-client</artifactId>
-      <version>3.0-b1</version>
+      <version>3.0.0-b1</version>
     </dependency>
   </dependencies>
   
