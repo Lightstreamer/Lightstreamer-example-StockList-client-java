@@ -215,7 +215,7 @@ public class StockTable extends AbstractTableModel {
           boolean isSnap = update.isSnapshot();
           int itemIndex = update.getItemPos() - 1; // item position is 1 based, so -1 to match the data array
           
-          Iterator<Entry<Integer, String>> fields = update.getChangedFieldsPositionIterator();
+          Iterator<Entry<Integer, String>> fields = update.getChangedFieldsByPosition().entrySet().iterator();
           
           while(fields.hasNext()) {
             Entry<Integer, String> field = fields.next();
