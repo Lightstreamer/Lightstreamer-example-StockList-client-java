@@ -216,3 +216,6 @@ pip-log.txt
 #build
 /target/
 /bin/
+.svn
+build_resources
+deployment
