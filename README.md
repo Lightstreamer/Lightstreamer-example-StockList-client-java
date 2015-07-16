@@ -102,5 +102,5 @@ the [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-Reusa
 
 ## Lightstreamer Compatibility Notes
 
-* Compatible with Lightstreamer Java Client API v. 2.5.2 or newer.
+* Compatible with Lightstreamer Java Client API v. 2.5.2 or newer 2.x versions.
 * For Lightstreamer Allegro (+ Java Client API support), Presto, Vivace.
