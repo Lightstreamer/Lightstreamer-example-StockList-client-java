@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Weswit Srl
+ * Copyright 2015 Weswit Srl
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,6 @@ public class StockView extends JFrame {
     private static final ImageIcon stalledIcon = new ImageIcon( StockView.class.getResource("/images/status_stalled.png") );  
     private static final ImageIcon streamingIcon = new ImageIcon( StockView.class.getResource("/images/status_connected_streaming.png") ); 
     
-    private JPanel jContentPane = null;
     private JTable table;
     private JLabel statusLabel;
 
@@ -210,6 +209,7 @@ public class StockView extends JFrame {
         
         //note that column and rows received by this method are view-related, so we'll use the convertColumnIndexToModel
         //to convert them when wee nedd'em to be model-related
+        @Override
         public synchronized Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column) {
             //all the columns but the stock_name one have to be aligned on the right
             if(table.convertColumnIndexToModel(column) != 0) {
@@ -263,6 +263,7 @@ public class StockView extends JFrame {
     
     public class ShutDownThread extends Thread {
         
+        @Override
         public void run() {
             //this thread will run forever even while the client is not connected or while there are no active StockView instances.
             //(in our demo there is always one StockView instance)

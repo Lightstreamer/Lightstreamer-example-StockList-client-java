@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Weswit Srl
+ * Copyright 2015 Weswit Srl
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,11 @@
 
 package javasedemo.swing;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.swing.SwingUtilities;
 
-import com.lightstreamer.ls_client.ConnectionInfo;
-import com.lightstreamer.ls_client.ConnectionListener;
-import com.lightstreamer.ls_client.ExtendedTableInfo;
-import com.lightstreamer.ls_client.LSClient;
-import com.lightstreamer.ls_client.PushConnException;
-import com.lightstreamer.ls_client.PushServerException;
-import com.lightstreamer.ls_client.PushUserException;
-import com.lightstreamer.ls_client.SubscrException;
-
+import com.lightstreamer.client.ClientListener;
+import com.lightstreamer.client.LightstreamerClient;
+import com.lightstreamer.client.Subscription;
 //this class is responsible for the connection to the 
 public class StockFeed {
     
@@ -60,201 +50,102 @@ public class StockFeed {
         }
     }
     
-    final private ConnectionInfo cInfo = new ConnectionInfo();
-    final private LSClient client = new LSClient();
-    final private StockView view;
-   
-    //the phase will change on each connection effort so that calls from older StatusListener will be ignored
-    private AtomicInteger phase = new AtomicInteger(0);
     
-    final private ExecutorService connectionThread;
+    final private LightstreamerClient client;
+    final private Subscription stocks;
+    final private StockView view;
+  
     final private StockTable table;
     
-    public StockFeed(String pushServerHost, int pushServerPort, StockView _view) {
-        this.cInfo.pushServerUrl = "http://" + pushServerHost + ":" + pushServerPort;
-        this.cInfo.adapter = "DEMO";
+    
+    public StockFeed(String lighstreamerAddress, StockView _view) {
+      
         this.view = _view;
-        
-      //the StockTable instance will receive table-related updates (it will be our HandyTableListener)
+          
+        //the StockTable instance will receive subscription updates (it will be our SubscriptionListener)
         this.table = new StockTable(group, schema, columnNames, classes);
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 view.setModel(table);
             }
         });
+          
+        //setup the client, will handle our connection and our subscriptions making sure we're always connected 
+        //and our items are always subscribed (well, as long as there is a network between us and the server)
+        this.client = new LightstreamerClient(lighstreamerAddress, "DEMO");
+        client.addListener(new StatusListener());
         
-        //prepare an ExecutorService that will handle our connection efforts
-        connectionThread = Executors.newSingleThreadExecutor();
+        //setup the subscription, it will receive the data for us
+        this.stocks = new Subscription("MERGE",group,schema);
+        stocks.setDataAdapter("QUOTE_ADAPTER");
+        stocks.setRequestedSnapshot("yes");
+        stocks.addListener(this.table.getTableListener());
+        
+        client.subscribe(stocks);
+        client.connect();  
+        
     }
     
-    public void start(int ph) {
-        if (ph != phase.get()) {
-            //we ignore old calls
-            return;
-        }
-        this.start();
-    }
-    
-    public void start() {
-        //this method starts a connection effort
-        int ph = phase.incrementAndGet();
-        connectionThread.execute(new ConnectionThread(ph));
-    }
     
     //notification of a change in the status of the connection
-    private void changeStatus(int ph, final int status) {
-        if (ph != phase.get()) {
-            //we ignore old calls
-            return;
-        }
-        
+    private void changeStatus(final int status) {
         //we ask the view to change the shown status exploiting the invokeLater method that will
         //execute the call in the GUI's thread
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 view.changeStatus(status);
             }
         });
     }
     
-    private void execute(int ph) {
-        if (ph != phase.get()) {
-             return;
-        }
-        ph = phase.incrementAndGet();
-        this.connect(ph);
-        this.subscribe();
-    }
     
-    private void connect(int ph) {
-        boolean connected = false;
-        //this method will not exit until the openConnection returns without throwing an exception
-        while (!connected) {
-            try {
-                if (ph != phase.get())
-                    return;
-                ph = phase.incrementAndGet();
-                client.openConnection(this.cInfo, new StatusListener(ph));
-                connected = true;
-            } catch (PushConnException e) {
-            } catch (PushServerException e) {
-            } catch (PushUserException e) {
-            }
-            
-            if (!connected) {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                }
-            }
-         }
-    }
-
-    private synchronized void subscribe() {
-        //this method will try just one subscription.
-        //we know that when this method executes we should be already connected
-        //If we're not or we disconnect while subscribing we don't have to do anything here as an
-        //event will be (or was) sent to the ConnectionListener that will handle the case.
-        //If we're connected but the subscription fails we can't do anything as the same subscription 
-        //would fail again and again (btw this should never happen)
-        ExtendedTableInfo tInfo;
+    private class StatusListener implements ClientListener {
         
-        try {
-            tInfo = new ExtendedTableInfo(group,"MERGE",schema,true);
-            tInfo.setDataAdapter("QUOTE_ADAPTER");
-            client.subscribeTable(tInfo, this.table.getTableListener(), false);
-
-        } catch (SubscrException e) {
-        } catch (PushServerException e) {
-        } catch (PushUserException e) {
-        } catch (PushConnException e) {
-        }
-    }
-    
-    
-    private class ConnectionThread extends Thread {
-        private final int ph;
-
-        public ConnectionThread(int ph) {
-            this.ph = ph;
+     
+     
+        @Override
+        public void onListenEnd(LightstreamerClient arg0) {
+          // we never call removeListener, thus this never happen
         }
 
-        public void run() {
-            execute(this.ph);
-        }
-    }
-    
-    private class StatusListener implements ConnectionListener {
-        
-        private int ph;
-        private boolean isPolling;
-        
-        public StatusListener(int ph) {
-            this.ph = ph;
-        }
-        
-        //synchronization is useless in this class as there is only one thread calling method on this listener
-        
-        private void onDisconnection() {
-            changeStatus(this.ph,DISCONNECTED);
-            start(this.ph);
-        }
-        
-        private void onConnection() {
-            if (this.isPolling) {
-                changeStatus(this.ph,POLLING);
-            } else {
-                changeStatus(this.ph,STREAMING);
-            }
-        }
-        
         @Override
-        public void onActivityWarning(boolean warningOn) {
-            if (warningOn) {
-                changeStatus(this.ph, STALLED);
-            } else {
-                this.onConnection();
-            }
+        public void onListenStart(LightstreamerClient arg0) {
+          this.onStatusChange(client.getStatus()); //we actually know that this will be DISCONNECTED
         }
-    
+
         @Override
-        public void onClose() {
-            this.onDisconnection();
+        public void onPropertyChange(String arg0) {
+          // we have no interest in this event 
         }
-    
+
         @Override
-        public void onConnectionEstablished() {
+        public void onServerError(int arg0, String arg1) {
+          // TODO ??
         }
-    
+
         @Override
-        public void onDataError(PushServerException arg0) {
-        }
-    
-        @Override
-        public void onEnd(int arg0) {
-            this.onDisconnection();
-        }
-    
-        @Override
-        public void onFailure(PushServerException arg0) {
-            this.onDisconnection();
-        }
-    
-        @Override
-        public void onFailure(PushConnException arg0) {
-            this.onDisconnection();
-        }
-    
-        @Override
-        public void onNewBytes(long bytes) {
-        }
-    
-        @Override
-        public void onSessionStarted(boolean isPolling) {
-            this.isPolling = isPolling;
-            
-            this.onConnection();
-            
+        public void onStatusChange(String status) {
+          switch(status) {
+            case "DISCONNECTED":
+            case "DISCONNECTED:WILL_RETRY":
+            case "CONNECTING": 
+            case "CONNECTED:STREAM-SENSING": //we're actually connected here
+              changeStatus(DISCONNECTED);
+              break;
+            case "CONNECTED:WS-STREAMING":
+            case "CONNECTED:HTTP-STREAMING":
+              changeStatus(STREAMING);
+              break;
+            case "CONNECTED:WS-POLLING":
+            case "CONNECTED:HTTP-POLLING":
+              changeStatus(POLLING);
+              break;
+            case "STALLED":
+              changeStatus(STALLED);
+              break;
+          }
         }
 
     }

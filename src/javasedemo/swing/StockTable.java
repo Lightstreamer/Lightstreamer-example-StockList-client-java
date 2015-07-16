@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Weswit Srl
+ * Copyright 2015 Weswit Srl
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,15 @@
 package javasedemo.swing;
 
 import java.security.InvalidParameterException;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
-import com.lightstreamer.ls_client.HandyTableListener;
-import com.lightstreamer.ls_client.UpdateInfo;
+
+import com.lightstreamer.client.ItemUpdate;
+import com.lightstreamer.client.Subscription;
+import com.lightstreamer.client.SubscriptionListener;
 
 public class StockTable extends AbstractTableModel {
 
@@ -34,16 +38,14 @@ public class StockTable extends AbstractTableModel {
     
     //the actual model
     private UpdateString[][] data;
-    
-    private int phase = 0;
-    
+        
     //whenever on an update fire a focused refresh request or a complete refresh request
     private boolean fullRefreshEnabled = false;
     
     //the max row index
     private final int maxRowIndex;
 
-    private UpdateListener listener;
+    private UpdateListener listener = new UpdateListener();
     private boolean firstUpdate = true;
 
     public StockTable(String[] group, String[] schema, String columnNames[], Class<?>[] classes) {
@@ -58,14 +60,8 @@ public class StockTable extends AbstractTableModel {
             throw new InvalidParameterException("schema columNames and classes must be of the same length");
         }
         this.data = new UpdateString[this.group.length][this.schema.length];
-        this.init();
     }
     
-    private void init() {
-        this.phase++;
-        this.firstUpdate = true;
-        this.listener = new UpdateListener(this.phase);
-    }
     
     private void onFirstUpdate() {
         this.data = new UpdateString[this.group.length][this.schema.length];
@@ -73,7 +69,7 @@ public class StockTable extends AbstractTableModel {
         this.firstUpdate = false;
     }
     
-    public HandyTableListener getTableListener() {
+    public SubscriptionListener getTableListener() {
         return this.listener;
     }
 
@@ -86,6 +82,7 @@ public class StockTable extends AbstractTableModel {
         //calls for a refresh on the view class (and changes on the view must be performed on the
         //GUI's thread)
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 fireTableDataChanged();
             }
@@ -98,6 +95,7 @@ public class StockTable extends AbstractTableModel {
         //fireTableDataChanged, btw calling fireTableDataChanged also means that the
         //number of rows may be changed
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 fireTableRowsUpdated(0, maxRowIndex);
             }
@@ -111,6 +109,7 @@ public class StockTable extends AbstractTableModel {
         } else {
             //see fireAsyncTableDataChanged comment
             SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     fireTableRowsUpdated(start, end);
                 }
@@ -125,6 +124,7 @@ public class StockTable extends AbstractTableModel {
         } else {
             //see fireAsyncTableDataChanged comment
             SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     fireTableCellUpdated(row,col);
                 }
@@ -179,68 +179,91 @@ public class StockTable extends AbstractTableModel {
     }
 
     
-    class UpdateListener implements HandyTableListener {
-        
-        private int ph;
+    class UpdateListener implements SubscriptionListener {
 
-        UpdateListener(int ph) {
-            this.ph = ph;
-        }
-        
         @Override
-        public void onRawUpdatesLost(int itemIndex, String itemName, int lostUpdates) {
-            return;
+        public void onClearSnapshot(String arg0, int arg1) {
+          // this adapter never calls the clear snapshot event, otherwise here we should have cleared the grid here
+          
         }
-    
+
         @Override
-        public void onSnapshotEnd(int itemIndex, String itemName) {
-            return;
+        public void onCommandSecondLevelItemLostUpdates(int arg0, String arg1) {
+          // not possible
         }
-    
+
         @Override
-        public void onUnsubscr(int itemIndex, String itemName) {
-            return;
+        public void onCommandSecondLevelSubscriptionError(int arg0, String arg1, String arg2) {
+          // not possible
         }
-    
+
         @Override
-        public void onUnsubscrAll() {
-            init();
-            return;
+        public void onEndOfSnapshot(String itemName, int itemPos) {
         }
-    
+
         @Override
-        public synchronized void onUpdate(int itemIndex, String itemName, UpdateInfo update) {
-            if (phase != this.ph){
-                return;
-            } else if (firstUpdate) {
-                onFirstUpdate();
+        public void onItemLostUpdates(String arg0, int arg1, int arg2) {
+          // not possible
+        }
+
+        @Override
+        public void onItemUpdate(ItemUpdate update) {
+          if (firstUpdate) {
+            onFirstUpdate();
+          }
+          
+          boolean isSnap = update.isSnapshot();
+          int itemIndex = update.getItemPos() - 1; // item position is 1 based, so -1 to match the data array
+          
+          Iterator<Entry<Integer, String>> fields = update.getChangedFieldsByPosition().entrySet().iterator();
+          
+          while(fields.hasNext()) {
+            Entry<Integer, String> field = fields.next();
+            int fieldIndex = field.getKey() - 1; // field position is 1 based, so -1 to match the data array 
+            if (data[itemIndex][fieldIndex] != null) {
+                //we already had an update for this cell so we just change the values and the hot state
+                data[itemIndex][fieldIndex].setValue(field.getValue());
+                //we avoid the hot state on snapshot events
+                data[itemIndex][fieldIndex].setHot(!isSnap);
+            } else {
+                //first update for this cell, we need a new UpdateString instance
+                data[itemIndex][fieldIndex] = new UpdateString(field.getValue(),!isSnap);
             }
-            
-            boolean isSnap = update.isSnapshot();
-            
-            for (int i=1; schema.length>=i; i++) {
-                if (update.isValueChanged(i)) {
-                    if (data[itemIndex-1][i-1] != null) {
-                        //we already had an update for this cell so we just change the values and the hot state
-                        data[itemIndex-1][i-1].setValue(update.getNewValue(i));
-                        //we avoid the hot state on snapshot events
-                        data[itemIndex-1][i-1].setHot(!isSnap);
-                    } else {
-                        //first update for this cell, we need a new UpdateString instance
-                        data[itemIndex-1][i-1] = new UpdateString(update.getNewValue(i),!isSnap);
-                    }
-                    if (!isSnap || !fullRefreshEnabled) {
-                        //if this is not the snapshot and the full refresh is not enabled, we fire a focused notification
-                        fireAsyncTableCellUpdated(itemIndex-1, i-1, false); 
-                    }
-                }
+            if (!isSnap || !fullRefreshEnabled) {
+                //if this is not the snapshot and the full refresh is not enabled, we fire a focused notification
+                fireAsyncTableCellUpdated(itemIndex, fieldIndex, false); 
             }
-            
-            if (isSnap || fullRefreshEnabled) {
-                //if this is the snapshot or the full refresh is enabled, we fire a row-related refresh 
-                //(note that if full refresh is enabled this will be made as a full refresh)
-                fireAsyncTableRowsUpdated(itemIndex-1, itemIndex-1);
-            }
+          }
+          
+          if (isSnap || fullRefreshEnabled) {
+            //if this is the snapshot or the full refresh is enabled, we fire a row-related refresh 
+            //(note that if full refresh is enabled this will be made as a full refresh)
+            fireAsyncTableRowsUpdated(itemIndex, itemIndex);
+          }
+        }
+
+        @Override
+        public void onListenEnd(Subscription arg0) {
+          // not possible
+          
+        }
+
+        @Override
+        public void onListenStart(Subscription arg0) {
+        }
+
+        @Override
+        public void onSubscription() {
+          // nothing to do
+        }
+
+        @Override
+        public void onSubscriptionError(int code, String message) {
+        }
+
+        @Override
+        public void onUnsubscription() {
+          firstUpdate = true;
         }
     }
     

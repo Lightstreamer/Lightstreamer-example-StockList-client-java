@@ -212,3 +212,10 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#build
+/target/
+/bin/
+.svn
+build_resources
+deployment
