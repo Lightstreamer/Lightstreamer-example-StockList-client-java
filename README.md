@@ -39,7 +39,10 @@ If you want to install a version of this demo pointing to your local Lightstream
 ## Build
 
 To build your own version of `java_sld.jar`, instead of using the one provided in the deploy.zip file from the Install section above, you have two options:
-either use [Maven](https://maven.apache.org/) (or other build tools) to take care of dependencies and building (recommended) or gather the necessary jars yourself and build it manually. 
+either use [Maven](https://maven.apache.org/) (or other build tools) to take care of dependencies and building (recommended) or gather the necessary jars yourself and build it manually. For the sake of simplicity only the Maven case is detailed here.
+
+The example requires that the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) has to be deployed in your local Lightstreamer server instance;
+the [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) is also needed, but it is already provided by Lightstreamer server.
 
 ###Maven
 
@@ -59,55 +62,6 @@ to your own server provided that [Lightstreamer - Stock- List Demo - Java Adapte
 is installed on it (the [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) is also needed, 
 but it is already provided by Lightstreamer server.)
 
-###Manual
-
-Follow these steps:
-
-Please consider that this example is comprised of the following folders:
-* /src<br>
-  Contains the sources to build the java application from the java compiler and its embedded images.
-
-* /lib<br>
-  Drop here the `ls-java-client-*.jar` from the Lighstreamer SDK for Java SE Clients, to be used for the build process and execution together with all its required libraries. You can discover the required libraries and their dependencies by looking at the provided pom.xml file. Note that dependencies are only required to run the application; the only compile requirement is the Lightstreamer Java client itself.
-
-* /bin<br>
-  Drop here the application jar, as compiled from the provided source files. 
-
-Example build commands:
-```sh
- >javac -source 1.7 -target 1.7 -nowarn -g -classpath lib/ls-javase-client.jar -sourcepath src/javasedemo -d tmp_classes src/javasedemo/swing/StockListDemo.java
- 
- >jar cvf java_sld.jar -C tmp_classes javasedemo
-```
-
-A couple of shell/batch files that can be used to run the demo:
-* batch command:
-
-```cmd
-@echo off
-
-set JAVA_HOME=C:\Program Files\Java\jdk1.7.0
-set CONF=http://localhost:8080
-
-call "%JAVA_HOME%\bin\java.exe" -cp "java_sld.jar";"../lib/*" javasedemo.swing.StockListDemo %CONF%
-pause
-```
-
-* shell command:
-
-```sh
-#! /bin/sh
-
-JAVA_HOME=/usr/jdk1.7.0
-CONF="http://localhost:8080"
-
-exec $JAVA_HOME/bin/java -cp "java_sld.jar:../lib/*" javasedemo.swing.StockListDemo $CONF
-```
-
-Those scripts are ready to run the client against the default Lightstreamer configuration but it may be necessary to change the reference to the java process inside them.
-
-The example requires that the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) has to be deployed in your local Lightstreamer server instance;
-the [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) is also needed, but it is already provided by Lightstreamer server.
 
 ## See Also
 
