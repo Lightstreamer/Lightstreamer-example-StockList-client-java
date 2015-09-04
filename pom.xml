@@ -86,7 +86,7 @@
     <repository>
       <id>weswit</id>
       <name>Weswit repository</name>
-      <url>http://download.lightstreamer.com/maven</url>
+      <url>http://www.lightstreamer.com/repo/maven</url>
     </repository>
   </repositories>
   
