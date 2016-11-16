@@ -265,6 +265,11 @@ public class StockTable extends AbstractTableModel {
         public void onUnsubscription() {
           firstUpdate = true;
         }
+        
+        public void onRealMaxFrequency(String frequency) {
+            System.out.println("Frequency is " + frequency);
+        }
+        
     }
     
 
