@@ -266,6 +266,7 @@ public class StockTable extends AbstractTableModel {
           firstUpdate = true;
         }
         
+        @Override
         public void onRealMaxFrequency(String frequency) {
             System.out.println("Frequency is " + frequency);
         }
