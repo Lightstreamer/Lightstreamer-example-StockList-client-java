@@ -1,7 +1,7 @@
 # Lightstreamer - Basic Stock-List Demo - Java SE (Swing) Client
 
 This project contains an example of a **Java Swing application** that employs the 
-[Lightstreamer Java SE client library](http://docs.lightstreamer.com/api/ls-javase-client/latest/).
+[Lightstreamer Java SE client library](http://docs.lightstreamer.com/api/ls-javase-client/latest_2_0/).
 
 ## Live Demo
 
@@ -80,7 +80,7 @@ but it is already provided by Lightstreamer server.)
 
 ## Lightstreamer Compatibility Notes
 
-* Compatible with Lightstreamer Java Client API version 3.0 or newer.
+* Compatible with Lightstreamer Java Client API version 3.0.
 * For Lightstreamer Allegro (+ Java Client API support), Presto, Vivace.
 * For a version of this example compatible with Lightstreamer Java Client API version 2.5.2, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-java/tree/latest-for-client-2.x).
 
