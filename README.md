@@ -6,7 +6,7 @@ This project contains an example of a **Java Swing application** that employs th
 
 [![Demo ScreenShot](screen_javaseswing_large.png)](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/javase-uni-stocklist-demo.zip)
 
-###[![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/javase-uni-stocklist-demo.zip)
+### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/JavaSE_Swing_StockListDemo/javase-uni-stocklist-demo.zip)
 
 (download javase-stocklist-demo.zip; unzip it; launch `start_demo.bat` on Windows or `start_demo.sh` on Linux)
 *To run this demo, you must have Java installed* . If you don't have Java already installed, please download it from [here] (https://www.java.com/en/download/).
@@ -43,7 +43,7 @@ either use [Maven](https://maven.apache.org/) (or other build tools) to take car
 The example requires that the [QUOTE_ADAPTER](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed in your local Lightstreamer server instance;
 the [LiteralBasedProvider](https://github.com/Lightstreamer/Lightstreamer-example-ReusableMetadata-adapter-java) is also needed, but it is already provided by Lightstreamer server.
 
-###Maven
+### Maven
 
 You can easily build and run this application using Maven through the pom.xml file located in the root folder of this project. As an alternative, you can use an alternative build tool (e.g. Gradle, Ivy, etc.) by converting the provided pom.xml file.
 
