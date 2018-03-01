@@ -80,7 +80,7 @@ but it is already provided by Lightstreamer server.)
 ## Lightstreamer Compatibility Notes
 
 * Compatible with Lightstreamer Java Client API version 4.0 or newer.
-* For Lightstreamer Allegro (+ Java Client API support), Presto, Vivace.
+* Ensure that Java SE Client API is supported by Lightstreamer Server license configuration.
 * For a version of this example compatible with Lightstreamer Java Client API version 3.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-java/tree/latest-for-client-3.x).
 * For a version of this example compatible with Lightstreamer Java Client API version 2.5.2, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-java/tree/latest-for-client-2.x).
 
