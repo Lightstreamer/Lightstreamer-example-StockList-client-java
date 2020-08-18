@@ -78,17 +78,7 @@
     <dependency>
       <groupId>com.lightstreamer</groupId>
       <artifactId>ls-javase-client</artifactId>
-      <version>4.0.0</version>
+      <version>4.3.4</version>
     </dependency>
-  </dependencies>
-  
-  <repositories>
-    <repository>
-      <id>weswit</id>
-      <name>Weswit repository</name>
-      <url>https://www.lightstreamer.com/repo/maven</url>
-    </repository>
-  </repositories>
-  
-
+  </dependencies> 
 </project>

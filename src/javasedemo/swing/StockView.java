@@ -184,6 +184,7 @@ public class StockView extends JFrame {
             //if the first sort key is the stock_name or the open_price column
             //(that are fields that never change) it disable the dynamic sort
             if (e.getType().equals(RowSorterEvent.Type.SORT_ORDER_CHANGED)) {
+                @SuppressWarnings("unchecked")
                 List<RowSorter.SortKey> keys = e.getSource().getSortKeys();
                 if(!keys.isEmpty()) {
                     int y = keys.get(0).getColumn();
