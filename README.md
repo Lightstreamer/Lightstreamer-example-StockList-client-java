@@ -1,6 +1,6 @@
 # Lightstreamer - Basic Stock-List Demo - Java SE (Swing) Client
 
-This project contains an example of a **Java Swing application** that employs the [Lightstreamer Java SE client library](http://docs.lightstreamer.com/api/ls-javase-client/latest/).
+This project contains an example of a **Java Swing application** that employs the [Lightstreamer Java SE client library](https://lightstreamer.com/api/ls-javase-client/latest/).
 
 ## Live Demo
 
