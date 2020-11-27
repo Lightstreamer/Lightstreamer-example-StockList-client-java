@@ -21,6 +21,9 @@ import javax.swing.SwingUtilities;
 import com.lightstreamer.client.ClientListener;
 import com.lightstreamer.client.LightstreamerClient;
 import com.lightstreamer.client.Subscription;
+
+import com.lightstreamer.log.system_out.SystemOutLogProvider;
+
 //this class is responsible for the connection to the 
 public class StockFeed {
     
@@ -70,6 +73,13 @@ public class StockFeed {
                 view.setModel(table);
             }
         });
+
+        //setup logging for Lightstreamer client library, factory configuration allow info but not debug
+        //for any issue investigation maybe you want to allow also debug 
+        SystemOutLogProvider mylog = new SystemOutLogProvider();
+        mylog.disableDebug(true);
+        mylog.disableInfo(false);
+        LightstreamerClient.setLoggerProvider(mylog);
           
         //setup the client, will handle our connection and our subscriptions making sure we're always connected 
         //and our items are always subscribed (well, as long as there is a network between us and the server)

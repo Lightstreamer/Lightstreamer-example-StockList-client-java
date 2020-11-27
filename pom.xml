@@ -80,5 +80,10 @@
       <artifactId>ls-javase-client</artifactId>
       <version>4.3.4</version>
     </dependency>
+	<dependency>
+       <groupId>com.lightstreamer</groupId>
+       <artifactId>java-system-out-log</artifactId>
+       <version>1.0.2</version>
+    </dependency>
   </dependencies> 
 </project>
