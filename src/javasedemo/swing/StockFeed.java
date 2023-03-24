@@ -22,7 +22,8 @@ import com.lightstreamer.client.ClientListener;
 import com.lightstreamer.client.LightstreamerClient;
 import com.lightstreamer.client.Subscription;
 
-import com.lightstreamer.log.system_out.SystemOutLogProvider;
+import com.lightstreamer.log.ConsoleLoggerProvider;
+import com.lightstreamer.log.ConsoleLogLevel;
 
 //this class is responsible for the connection to the 
 public class StockFeed {
@@ -74,11 +75,9 @@ public class StockFeed {
             }
         });
 
-        //setup logging for Lightstreamer client library, factory configuration allow info but not debug
-        //for any issue investigation maybe you want to allow also debug 
-        SystemOutLogProvider mylog = new SystemOutLogProvider();
-        mylog.disableDebug(true);
-        mylog.disableInfo(false);
+        //setup logging for Lightstreamer client library
+        //for any issue investigation maybe you want to set to debug level
+        ConsoleLoggerProvider mylog = new ConsoleLoggerProvider(ConsoleLogLevel.INFO);
         LightstreamerClient.setLoggerProvider(mylog);
           
         //setup the client, will handle our connection and our subscriptions making sure we're always connected 
@@ -116,13 +115,12 @@ public class StockFeed {
      
      
         @Override
-        public void onListenEnd(LightstreamerClient arg0) {
+        public void onListenEnd() {
           // we never call removeListener, thus this never happen
         }
 
         @Override
-        public void onListenStart(LightstreamerClient arg0) {
-          this.onStatusChange(client.getStatus()); //we actually know that this will be DISCONNECTED
+        public void onListenStart() {
         }
 
         @Override

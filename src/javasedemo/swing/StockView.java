@@ -185,7 +185,7 @@ public class StockView extends JFrame {
             //(that are fields that never change) it disable the dynamic sort
             if (e.getType().equals(RowSorterEvent.Type.SORT_ORDER_CHANGED)) {
                 @SuppressWarnings("unchecked")
-                List<RowSorter.SortKey> keys = e.getSource().getSortKeys();
+                List<? extends RowSorter.SortKey> keys = e.getSource().getSortKeys();
                 if(!keys.isEmpty()) {
                     int y = keys.get(0).getColumn();
                     if (y != 0 && y != 11) {

@@ -243,13 +243,13 @@ public class StockTable extends AbstractTableModel {
         }
 
         @Override
-        public void onListenEnd(Subscription arg0) {
+        public void onListenEnd() {
           // not possible
           
         }
 
         @Override
-        public void onListenStart(Subscription arg0) {
+        public void onListenStart() {
         }
 
         @Override
