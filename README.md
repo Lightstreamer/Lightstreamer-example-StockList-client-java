@@ -22,7 +22,7 @@ This app uses the **Java SE Client API for Lightstreamer** to handle the communi
 You can sort on any columns and drag the columns around.
 
 This application uses the LightstreamerClient class to connect to Lightstreamer Server and subscribe to the 30 items. 
-The client library offers auto-reconnection and auto-resubscription logic out of the box. The status of the connection can be seen on the top left corener of the demo.
+The client library offers auto-reconnection and auto-resubscription logic out of the box. The status of the connection can be seen on the top left corner of the demo.
 Java Swing classes are used to display the real-time updates received from Lightstreamer Server. The application code implements a cell highlighting mechanism, too.
 
 
